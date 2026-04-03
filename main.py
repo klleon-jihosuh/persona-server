@@ -224,3 +224,9 @@ def restore_persona(
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "dist")
 if os.path.exists(STATIC_DIR):
     app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
+
+# ─── 서버 실행 (Railway 등 클라우드 배포용) ────────────────────────────────────
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
